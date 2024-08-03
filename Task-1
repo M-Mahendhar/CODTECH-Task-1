@@ -1,0 +1,27 @@
+#include <DHT.h>  //Including the DHT11_Sensor File/Directories
+#include <DHT_U.h>
+#include <LiquidCrystal.h>//Including the LCD Crystal_Display File/Directories
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);  //Defining the Pins of the LCDCrystal_Display
+
+#define DHT11_PIN 13  //Defining the pin of DHT11_Sensor
+DHT dht(DHT11_PIN,DHT11);
+
+void setup(){
+  lcd.begin(16, 2);  
+  dht.begin();
+}
+
+void loop(){
+  float temp=dht.readTemperature();   //Reading the Temperature Data from DHT11_Sensor
+  float hum=dht.readHumidity();      //Reading the Humidity Data from DHT11_Sensor
+  lcd.setCursor(0,0);                // Setting the Cursor on the Display to initial position
+  lcd.print("Temp: ");               
+  lcd.print(temp);                   // Printing the Temperature Data on the Display
+  lcd.print("C");
+  lcd.setCursor(0,1);                // Setting the Cursor on the Display to next line
+  lcd.print("Humidity: ");          
+  lcd.print(hum);                  // Printing the Humidity Data on the Display
+  lcd.print("%");
+  delay(1000);
+}
